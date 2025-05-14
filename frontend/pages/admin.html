@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="../assets/js/authGuard.js" type="module"></script>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+  <header role="banner">
+    <h1 id="admin-title" tabindex="-1">Admin Panel</h1>
+  </header>
+  <main role="main" aria-labelledby="admin-title">
+    <h2>Welcome, Admin!</h2>
+    <section>
+      <h3>Manage Users</h3>
+      <button id="refresh-users" aria-label="Refresh Users">Refresh Users</button>
+      <button id="logout-btn" aria-label="Logout">Logout</button>
+      <table id="users-table" border="1" role="grid" aria-label="Users Table">
+        <thead role="rowgroup">
+          <tr role="row">
+            <th role="columnheader">ID</th>
+            <th role="columnheader">Username</th>
+            <th role="columnheader">Email</th>
+            <th role="columnheader">Role</th>
+            <th role="columnheader">Full Name</th>
+            <th role="columnheader">Action</th>
+          </tr>
+        </thead>
+        <tbody role="rowgroup"></tbody>
+      </table>
+      <h4>Add User</h4>
+      <form id="add-user-form" role="form" aria-label="Add User Form">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" placeholder="Username" required aria-label="Username">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="Email" required aria-label="Email">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" placeholder="Password" required aria-label="Password">
+        <label for="full_name">Full Name:</label>
+        <input type="text" name="full_name" id="full_name" placeholder="Full Name" required aria-label="Full Name">
+        <label for="role">Role:</label>
+        <select name="role" id="role" aria-label="Role">
+          <option value="student">Student</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button type="submit" aria-label="Add User">Add User</button>
+      </form>
+      <div id="user-error-status" role="alert" aria-live="assertive"></div>
+    </section>
+    <section>
+      <h3>Manage Exams</h3>
+      <button id="refresh-exams">Refresh Exams</button>
+      <table id="exams-table" border="1" role="grid" aria-label="Exams Table">
+        <thead role="rowgroup">
+          <tr role="row">
+            <th role="columnheader">ID</th>
+            <th role="columnheader">Title</th>
+            <th role="columnheader">Start</th>
+            <th role="columnheader">End</th>
+            <th role="columnheader">Action</th>
+          </tr>
+        </thead>
+        <tbody role="rowgroup"></tbody>
+      </table>
+      <h4>Add Exam</h4>
+      <form id="add-exam-form" role="form" aria-label="Add Exam Form">
+        <input type="text" name="title" placeholder="Title" required aria-label="Title">
+        <input type="number" name="duration" placeholder="Duration (min)" required aria-label="Duration">
+        <input type="datetime-local" name="start_time" placeholder="Start Time" required aria-label="Start Time">
+        <input type="datetime-local" name="end_time" placeholder="End Time" required aria-label="End Time">
+        <button type="submit" aria-label="Add Exam">Add Exam</button>
+      </form>
+    </section>
+    <div role="alert" aria-live="assertive" aria-atomic="true" id="error-status"></div>
+    <section>
+      <h3>Manual Grading & Results</h3>
+      <button id="refresh-submissions" aria-label="Refresh Submissions">Refresh Submissions</button>
+      <table id="submissions-table" border="1" role="grid" aria-label="Submissions Table">
+        <thead role="rowgroup">
+          <tr role="row">
+            <th role="columnheader">Submission ID</th>
+            <th role="columnheader">Exam</th>
+            <th role="columnheader">User</th>
+            <th role="columnheader">Status</th>
+            <th role="columnheader">Action</th>
+          </tr>
+        </thead>
+        <tbody role="rowgroup"></tbody>
+      </table>
+      <div id="grading-error-status" role="alert" aria-live="assertive"></div>
+    </section>
+  </main>
+  <script src="../assets/js/textToSpeech.js" type="module"></script>
+  <script src="../assets/js/accessibility.js" type="module"></script>
+  <script src="../assets/js/admin.js" type="module"></script>
+</body>
+
+</html>

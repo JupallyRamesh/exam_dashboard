@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Login</title></head>
+<body>
+  <h2>Login Page</h2>
+  <form id="login-form" aria-label="Login form">
+    <label for="role">Login as:</label>
+    <select id="role" name="role" aria-required="true">
+      <option value="student">Student</option>
+      <option value="admin">Admin</option>
+    </select><br>
+    <div id="student-fields">
+      <label for="examId">Exam ID:</label>
+      <input type="text" id="examId" name="examId" aria-required="true"><br>
+      <label for="student-password">Password:</label>
+      <input type="password" id="student-password" name="password" aria-required="true"><br>
+    </div>
+    <div id="admin-fields" style="display:none">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" aria-required="true"><br>
+      <label for="admin-password">Password:</label>
+      <input type="password" id="admin-password" name="password" aria-required="true"><br>
+    </div>
+    <button type="submit" aria-label="Login">Login</button>
+    <div style="font-size:0.9em;color:#555;margin-top:0.5em;">If you do not have an assigned exam, please contact your administrator.</div>
+    <div id="login-error" style="color:red;" aria-live="assertive"></div>
+  </form>
+  <div style="margin-top:1em;">
+    <a href="register.html" id="register-link" aria-label="Register for a new account">Don't have an account? Register here</a>
+  </div>
+  <script src="../assets/js/textToSpeech.js" type="module"></script>
+  <script src="../assets/js/accessibility.js" type="module"></script>
+  <script src="../assets/js/login.js" type="module"></script>
+</body>
+</html>

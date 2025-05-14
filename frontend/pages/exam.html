@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="../assets/js/authGuard.js" type="module"></script>
+  <meta charset="UTF-8">
+  <title>Exam</title>
+  <link rel="stylesheet" href="../assets/styles/main.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: #2c3e50;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.2em;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    #question-container {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 4px solid #3498db;
+    }
+
+    #question-text {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      font-weight: 500;
+    }
+
+    #options-list {
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .option {
+      list-style: none;
+      padding: 15px;
+      margin: 10px 0;
+      background: #f8f9fa;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .option:hover {
+      background: #e9ecef;
+      border-color: #adb5bd;
+      transform: translateX(5px);
+    }
+
+    .option.selected {
+      background: #cce5ff;
+      border-color: #0d6efd;
+      color: #004085;
+    }
+
+    .option:focus {
+      outline: 3px solid #0d6efd;
+      outline-offset: 2px;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 150px;
+    }
+
+    #start-btn {
+      background: #3498db;
+      color: white;
+    }
+
+    #start-btn:hover:not(:disabled) {
+      background: #2980b9;
+      transform: translateY(-2px);
+    }
+
+    #next-btn {
+      background: #2ecc71;
+      color: white;
+    }
+
+    #next-btn:hover:not(:disabled) {
+      background: #27ae60;
+      transform: translateY(-2px);
+    }
+
+    #submit-btn {
+      background: #e74c3c;
+      color: white;
+    }
+
+    #submit-btn:hover:not(:disabled) {
+      background: #c0392b;
+      transform: translateY(-2px);
+    }
+
+    button:disabled {
+      background: #95a5a6;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 20px;
+        margin: 20px;
+      }
+
+      h2 {
+        font-size: 1.8em;
+      }
+
+      .button-container {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+  <!-- Text-to-Speech & Speech-to-Text modules -->
+  <script type="module" src="../assets/js/textToSpeech.js"></script>
+  <script type="module" src="../assets/js/speechToText.js"></script>
+  <!-- Our exam logic -->
+  <script type="module" src="../assets/js/exam.js" defer></script>
+</head>
+
+<body>
+  <main role="main" aria-labelledby="exam-title">
+    <h2 id="exam-title" tabindex="-1">Exam</h2>
+    <div id="question-container">
+      <p id="question-text" aria-live="polite">Click "Start Exam" to begin.</p>
+      <ul id="options-list"></ul>
+    </div>
+    <div class="button-container">
+      <button id="start-btn">Start Exam</button>
+      <button id="next-btn" disabled>Next Question</button>
+      <button id="submit-btn" disabled>Submit Exam</button>
+    </div>
+  </main>
+</body>
+
+</html>

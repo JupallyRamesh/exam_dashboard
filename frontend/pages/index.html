@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Role Selection</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      margin-bottom: 40px;
+      color: #2c3e50;
+      font-size: 2.5em;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .role-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .role-card {
+      width: 280px;
+      padding: 30px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .role-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .role-image {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .role-title {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    .role-description {
+      color: #555;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .button {
+      padding: 12px 24px;
+      font-size: 1em;
+      font-weight: 600;
+      text-decoration: none;
+      color: white;
+      background-color: #3498db;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      min-width: 150px;
+    }
+
+    .student-button {
+      background-color: #3498db;
+    }
+
+    .student-button:hover {
+      background-color: #2980b9;
+    }
+
+    .admin-button {
+      background-color: #e74c3c;
+    }
+
+    .admin-button:hover {
+      background-color: #c0392b;
+    }
+
+    .button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin: 20px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      .role-card {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Welcome! Select your role</h1>
+
+    <div class="role-container">
+      <div class="role-card" onclick="redirectTo('student')">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Student" class="role-image">
+        <h2 class="role-title">Student</h2>
+        <p class="role-description">Access your exams and take tests with accessibility features designed for visually
+          challenged students.</p>
+        <button class="button student-button">Student Login</button>
+      </div>
+
+      <div class="role-card" onclick="redirectTo('admin')">
+        <img src="https://cdn-icons-png.flaticon.com/512/2206/2206368.png" alt="Admin" class="role-image">
+        <h2 class="role-title">Admin</h2>
+        <p class="role-description">Manage exams, create questions, and oversee the examination process for students.
+        </p>
+        <button class="button admin-button">Admin Login</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function redirectTo(role) {
+      if (role === 'student') {
+        window.location.href = '/studentLogin.html';
+      } else if (role === 'admin') {
+        window.location.href = '/adminportal.html';
+      }
+    }
+  </script>
+</body>
+
+</html>

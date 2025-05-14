@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="../assets/js/authGuard.js" type="module"></script>
+  <meta charset="UTF-8">
+  <title>Exam Results</title>
+  <link rel="stylesheet" href="../assets/styles/main.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: #2c3e50;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.2em;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    #summary {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 4px solid #3498db;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    #details {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    #details thead {
+      background: #3498db;
+      color: white;
+    }
+
+    #details th {
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    #details tbody tr {
+      border-bottom: 1px solid #e0e0e0;
+      transition: background-color 0.3s ease;
+    }
+
+    #details tbody tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    #details tbody tr:hover {
+      background-color: #f0f7fc;
+    }
+
+    #details td {
+      padding: 15px;
+      vertical-align: top;
+    }
+
+    #details td:first-child {
+      font-weight: 500;
+    }
+
+    #details td:nth-child(3),
+    #details td:nth-child(4) {
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .correct {
+      color: #2ecc71;
+    }
+
+    .incorrect {
+      color: #e74c3c;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    #back-btn {
+      padding: 12px 24px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 200px;
+    }
+
+    #back-btn:hover {
+      background: #2980b9;
+      transform: translateY(-2px);
+    }
+
+    #back-btn:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin: 20px;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+
+      #details {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      #details th,
+      #details td {
+        padding: 10px;
+      }
+    }
+  </style>
+  <script src="../assets/js/textToSpeech.js"></script>
+  <script type="module" src="../assets/js/results.js" defer></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Your Exam Results</h1>
+    <div id="summary"></div>
+    <table id="details" border="1" cellpadding="8">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Your Answer</th>
+          <th>Marks Obtained</th>
+          <th>Max Marks</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="button-container">
+      <button id="back-btn">Back to Dashboard</button>
+    </div>
+  </div>
+</body>
+
+</html>

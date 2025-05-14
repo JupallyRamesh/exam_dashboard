@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Role Selection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 15px 30px;
+      margin: 20px;
+      font-size: 18px;
+      text-decoration: none;
+      color: white;
+      background-color: #4CAF50;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Welcome! Select your role</h1>
+
+  <button onclick="redirectTo('student')" class="button">Student</button>
+  <button onclick="redirectTo('admin')" class="button">Admin</button>
+
+  <script>
+    function redirectTo(role) {
+      if (role === 'student') {
+        window.location.href = '/studentLogin.html';
+      } else if (role === 'admin') {
+        window.location.href = '/adminLogin.html';
+      }
+    }
+  </script>
+
+</body>
+
+</html>

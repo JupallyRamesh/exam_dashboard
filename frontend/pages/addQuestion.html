@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Add Question</title>
+  <link rel="stylesheet" href="../assets/styles/main.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f7fa;
+      color: #2c3e50;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      font-size: 2.2em;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+    }
+
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #34495e;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 2px solid #dce4ec;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    select {
+      background-color: white;
+      cursor: pointer;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(1px);
+    }
+
+    /* Error state */
+    input:invalid,
+    select:invalid,
+    textarea:invalid {
+      border-color: #e74c3c;
+    }
+
+    /* Success message animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .success-message {
+      animation: fadeIn 0.5s ease;
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      form {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Add a New Question</h1>
+  <form id="question-form">
+    <label for="exam_id">Exam ID:</label>
+    <input type="number" id="exam_id" name="exam_id" required>
+
+    <label for="exam_select">Exam:</label>
+    <select id="exam_select" name="exam_select" required>
+      <option value="">--Select Exam--</option>
+    </select>
+    <input type="hidden" id="exam_id" name="exam_id">
+    <input type="hidden" id="subject" name="subject">
+
+    <label for="question_type">Question Type:</label>
+    <select id="question_type" name="question_type" required>
+      <option value="">--Select Type--</option>
+      <option value="objective">Objective</option>
+      <option value="subjective">Subjective</option>
+    </select>
+
+    <label for="question_text">Question Text:</label>
+    <textarea id="question_text" name="question_text" required placeholder="Enter your question here..."></textarea>
+
+    <div id="objective-fields" style="display: none;">
+      <label for="options">Options (comma separated):</label>
+      <input type="text" id="options" name="options" placeholder="e.g., Option 1, Option 2, Option 3, Option 4">
+
+      <label for="correct_option">Correct Option:</label>
+      <input type="text" id="correct_option" name="correct_option" placeholder="Enter the correct option">
+    </div>
+
+    <div id="subjective-fields" style="display: none;">
+      <label for="correct_answer">Correct Answer:</label>
+      <textarea id="correct_answer" name="correct_answer"
+        placeholder="Enter the model/sample answer for reference"></textarea>
+    </div>
+
+    <label for="marks">Marks awarded for this question:</label>
+    <input type="number" id="marks" name="marks" required min="1" placeholder="Enter marks for this question">
+
+    <button type="submit">Add Question</button>
+  </form>
+
+  <script>
+    // Populate the exam dropdown from backend
+    window.addEventListener('DOMContentLoaded', async function () {
+      try {
+        const res = await fetch('http://localhost:3000/api/exams/list');
+        const data = await res.json();
+        if (data.success && data.exams) {
+          const examSelect = document.getElementById('exam_select');
+          data.exams.forEach(exam => {
+            const opt = document.createElement('option');
+            opt.value = exam.id;
+            opt.textContent = `${exam.title} (ID: ${exam.id})`;
+            opt.setAttribute('data-subject', exam.title);
+            examSelect.appendChild(opt);
+          });
+        }
+      } catch (e) {
+        alert('Failed to load exams');
+      }
+
+      // Add event listener for question type selection
+      document.getElementById('question_type').addEventListener('change', function (e) {
+        const objectiveFields = document.getElementById('objective-fields');
+        const subjectiveFields = document.getElementById('subjective-fields');
+        const options = document.getElementById('options');
+        const correctOption = document.getElementById('correct_option');
+        const correctAnswer = document.getElementById('correct_answer');
+
+        if (e.target.value === 'objective') {
+          objectiveFields.style.display = 'block';
+          subjectiveFields.style.display = 'none';
+          options.required = true;
+          correctOption.required = true;
+          correctAnswer.required = false;
+        } else if (e.target.value === 'subjective') {
+          objectiveFields.style.display = 'none';
+          subjectiveFields.style.display = 'block';
+          options.required = false;
+          correctOption.required = false;
+          correctAnswer.required = true;
+        } else {
+          objectiveFields.style.display = 'none';
+          subjectiveFields.style.display = 'none';
+          options.required = false;
+          correctOption.required = false;
+          correctAnswer.required = false;
+        }
+      });
+    });
+
+    document.getElementById('question-form').onsubmit = async function (event) {
+      event.preventDefault();
+
+      const examSelect = document.getElementById('exam_select');
+      const examId = examSelect.value;
+      const subject = examSelect.options[examSelect.selectedIndex].getAttribute('data-subject');
+      const questionText = document.getElementById('question_text').value;
+      const questionType = document.getElementById('question_type').value;
+      const marks = document.getElementById('marks').value;
+
+      let correctAnswer, options;
+      if (questionType === 'objective') {
+        const optionsInput = document.getElementById('options').value.split(',').map(opt => opt.trim());
+        correctAnswer = document.getElementById('correct_option').value;
+        options = {};
+        optionsInput.forEach((opt, idx) => {
+          options[String.fromCharCode(65 + idx)] = opt; // A, B, C, D...
+        });
+      } else {
+        correctAnswer = document.getElementById('correct_answer').value;
+        options = null;
+      }
+
+      const payload = {
+        exam_id: examId,
+        subject: subject,
+        question_text: questionText,
+        question_type: questionType,
+        options: options,
+        correct_answer: correctAnswer,
+        marks: parseInt(marks)
+      };
+
+      try {
+        const res = await fetch('http://localhost:3000/api/questions/create', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+        if (result.success) {
+          alert('Question added successfully!');
+          event.target.reset();
+          document.getElementById('objective-fields').style.display = 'none';
+          document.getElementById('subjective-fields').style.display = 'none';
+        } else {
+          alert('Failed to add question: ' + result.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while adding the question.');
+      }
+    };
+  </script>
+</body>
+
+</html>

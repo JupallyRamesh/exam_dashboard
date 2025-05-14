@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Student Login</title>
+  <link rel="stylesheet" href="../assets/styles/main.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.2em;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #34495e;
+      font-weight: 500;
+      font-size: 0.95em;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 1em;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+    }
+
+    #login-error {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 6px;
+      background-color: #ffebee;
+      border: 1px solid #ffcdd2;
+      color: #c62828;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    .help-text {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 20px;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .register-link {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 0.95em;
+    }
+
+    .register-link a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .register-link a:hover {
+      color: #2980b9;
+      text-decoration: underline;
+    }
+
+    .register-link a:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+      border-radius: 2px;
+    }
+
+    @media (max-width: 480px) {
+      form {
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 1.8em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Student Login</h2>
+  <form id="student-login-form" aria-label="Student login form">
+    <label for="examId">Exam ID (provided by admin):</label>
+    <input type="text" id="examId" name="examId" required aria-required="true" autofocus>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required aria-required="true">
+    <button type="submit" aria-label="Login to exam">Login</button>
+    <div class="help-text">If you do not have an assigned exam, please contact your administrator.</div>
+    <div class="register-link">
+      Don't have an account? <a href="register.html" aria-label="Go to registration page">Register here</a>
+    </div>
+  </form>
+  <div id="login-error" aria-live="assertive"></div>
+  <script src="../assets/js/studentLogin.js" type="module"></script>
+</body>
+
+</html>
